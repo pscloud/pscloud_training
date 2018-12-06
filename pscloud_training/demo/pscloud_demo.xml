@@ -37,6 +37,5 @@
             <field name="subject_id" ref="pscloud_training.demo_training_subject"/>
         </record>
 
-
     </data>
 </odoo>
