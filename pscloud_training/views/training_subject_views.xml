@@ -1,0 +1,61 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_training_subject_tree" model="ir.ui.view">
+            <field name="name">pscloud.training.subject.tree</field>
+            <field name="model">pscloud.training.subject</field>
+            <field name="arch" type="xml">
+                <tree string="科目列表">
+                    <field name="name"/>
+                    <field name="person_id"/>
+                    <field name="desc"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_training_subject_form" model="ir.ui.view">
+            <field name="name">pscloud.training.subject.form</field>
+            <field name="model">pscloud.training.subject</field>
+            <field name="arch" type="xml">
+                <form string="课程">
+                   <sheet>
+                       <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="person_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="课程">
+                                <field name="lesson_ids">
+                                    <tree string="课程列表" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="teacher_id"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                                <field name="desc" class="oe_inline" placeholder="请填写备注信息..."/>
+                            </page>
+                       </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_training_subject" model="ir.actions.act_window">
+            <field name="name">科目</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pscloud.training.subject</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_training_subject_tree"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

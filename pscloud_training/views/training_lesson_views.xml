@@ -1,0 +1,103 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_training_lesson_calendar">
+            <field name="model">pscloud.training.lesson</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="课程日期" date_start="start_date" date_stop="end_date" color="teacher_id">
+                    <field name="name"/>
+                    <field name="teacher_id"/>
+                    <field name="seat_qty"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_training_lesson_graph">
+            <field name="model">pscloud.training.lesson</field>
+            <field name="arch" type="xml">
+                <graph string="课程">
+                    <field name="start_date" type="row"/>
+                    <field name="subject_id" type="col"/>
+                    <field name="seat_qty" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_training_lesson_pivot" model="ir.ui.view">
+            <field name="model">pscloud.training.lesson</field>
+            <field name="arch" type="xml">
+                <pivot string="课程分析" disable_linking="True">
+                    <field name="name" type="row"/>
+                    <field name="seat_qty" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_training_lesson_tree" model="ir.ui.view">
+            <field name="name">pscloud.training.lesson.tree</field>
+            <field name="model">pscloud.training.lesson</field>
+            <field name="arch" type="xml">
+                <tree string="课程列表">
+                    <field name="name"/>
+                    <field name="teacher_id"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="continue_days"/>
+                    <field name="seat_qty"/>
+                    <field name="subject_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_training_lesson_form" model="ir.ui.view">
+            <field name="name">pscloud.training.lesson.form</field>
+            <field name="model">pscloud.training.lesson</field>
+            <field name="arch" type="xml">
+                <form string="课程">
+                    <header>
+                        <button name="action_confirm" type="object" string="确认"  states="draft" class="btn-primary" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'readonly': [('state', '=', 'confirm')]}" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="subject_id" attrs="{'readonly': [('state', '=', 'confirm')]}"/>
+                                <field name="teacher_id" attrs="{'readonly': [('state', '=', 'confirm')]}"/>
+                                <field name="person_id" attrs="{'readonly': [('state', '=', 'confirm')]}"/>
+                                <field name="seat_qty"/>
+                            </group>
+                            <group>
+                                <field name="start_date" attrs="{'readonly': [('state', '=', 'confirm')]}"/>
+                                <field name="end_date" attrs="{'readonly': [('state', '=', 'confirm')]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="学生">
+                                <button name="%(action_training_student_regiester_view)d" type="action" string="学生注册"  states="confirm" />
+                                <field name="student_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+
+            </field>
+        </record>
+
+        <record id="action_training_lesson" model="ir.actions.act_window">
+            <field name="name">课程</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pscloud.training.lesson</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_training_lesson_tree"/>
+            <field name="view_mode">tree,form,calendar,graph,pivot</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_training_teacher" model="ir.actions.act_window">
+            <field name="name">老师</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_teacher','=',1)]</field>
+            <field name="context">{'default_is_teacher': True}</field>
+        </record>
+
+        <record id="action_training_student" model="ir.actions.act_window">
+            <field name="name">学生</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_student','=',1)]</field>
+            <field name="context">{'default_is_student': True}</field>
+        </record>
+
+        <record id="view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='website']" position="after">
+                    <field name="is_teacher" />
+                    <field name="is_student" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

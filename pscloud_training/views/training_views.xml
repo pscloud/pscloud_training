@@ -1,0 +1,13 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="training_menu_root" name="培训管理" sequence="0"/>
+        <menuitem id="subject_menu" parent="training_menu_root" action="action_training_subject" sequence="10"/>
+        <menuitem id="lesson_menu" parent="training_menu_root" action="action_training_lesson" sequence="20"/>
+        <menuitem id="person_menu" name ="人员资料" parent="training_menu_root" sequence="30"/>
+        <menuitem id="teacher_menu" parent="person_menu" action="action_training_teacher" sequence="10"/>
+        <menuitem id="student_menu" parent="person_menu" action="action_training_student" sequence="20"/>
+
+    </data>
+</odoo>

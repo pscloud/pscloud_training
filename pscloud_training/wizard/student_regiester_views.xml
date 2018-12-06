@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="training_student_regiester_view" model="ir.ui.view">
+            <field name="name">学生注册</field>
+            <field name="model">pscloud.training.student.regiester</field>
+            <field name="arch" type="xml">
+                <form string="学生注册">
+                    <p class="oe_grey">
+                        请选学生进行注册：
+                    </p>
+                    <group>
+                        <field name="student_ids" class="oe_inline" widget="many2many_tags"
+                            domain="[('is_student','=',True)]"/>
+                    </group>
+                    <footer>
+                        <button name="regiester" string="确认" type="object" class="btn-primary"/>
+                        <button string="取消" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_training_student_regiester_view" model="ir.actions.act_window">
+            <field name="name">学生注册</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pscloud.training.student.regiester</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+</odoo>
